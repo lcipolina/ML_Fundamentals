@@ -1,0 +1,27 @@
+# import the libraries
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+# read the dataset
+bank_note_data = pd.read_csv("BankNote_Authentication.csv")
+
+### scatter plot
+plt.scatter(bank_note_data["variance"], bank_note_data["skewness"]) # scatter plot variance vs skewness
+plt.xlabel("variance") # plot xlabel
+plt.ylabel("skewness") # plot ylabel
+plt.show()             # display the plot
+
+### Histogram
+plt.hist(bank_note_data["variance"], edgecolor="black", bins=10)  # histogram of variance
+plt.xlabel("Variance")  # plot xlabel
+plt.ylabel("Frequency") # plot ylabel
+plt.show()              # display the plot
+
+### swarm plot
+sns.swarmplot(x = "variance", y = "skewness", data = bank_note_data)  # swarmplot variance vs skweness
+plt.show()              # display the plot
+
+# bar plot
+sns.countplot(x="class", data=bank_note_data)  # countplot class
+plt.show()              # display the plot
