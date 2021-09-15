@@ -25,3 +25,22 @@ plt.show()              # display the plot
 # bar plot
 sns.countplot(x="class", data=bank_note_data)  # countplot class
 plt.show()              # display the plot
+from sklearn.datasets.samples_generator import (make_blobs,
+                                                make_circles,
+                                                make_moons)
+from sklearn.cluster import KMeans, SpectralClustering
+
+data = np.column_stack(( df.V1, df.V2))  # we use only V1 and V2
+
+# compute K-Means
+km_res = KMeans(n_clusters = 2).fit(data)
+clusters = km_res.cluster_centers_
+
+# put the assigned labels to the original dataset
+df['KMeans'] = km_res.labels_
+
+#plot out the result
+g = sb.FacetGrid(data = df, hue = 'KMeans', size = 5)
+g.map(plt.scatter, 'V1', 'V2')
+g.add_legend();
+plt.scatter(clusters[:,0], clusters[:,1], s=500, marker='*', c='r')
